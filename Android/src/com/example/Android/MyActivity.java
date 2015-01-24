@@ -13,12 +13,22 @@ public class MyActivity extends AndroidApplication {
      * Called when the activity is first created.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        public void onCreate(Bundle savedInstanceState) {
 
-        AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
-       //  cfg.useGL20 = false;
+            super.onCreate(savedInstanceState);
 
-        initialize(new MyGame(), cfg);
+            AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+
+            config.useAccelerometer = false;
+
+            config.useCompass = false;
+
+            config.useWakelock = true;
+
+            //config.useGL20 = true;
+
+            initialize(new MyGame(), config);
+
+        }
+
     }
-}
