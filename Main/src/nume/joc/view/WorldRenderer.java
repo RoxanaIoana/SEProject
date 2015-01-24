@@ -35,6 +35,9 @@ public class WorldRenderer {
         this.cam.update();
 
     }
+    public void render() {
+
+    }
 
 
 }

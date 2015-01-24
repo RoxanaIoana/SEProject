@@ -10,9 +10,5 @@ import nume.joc.MyGame;
 public class DesktopStarter {
     public static void main(String[] args) {
 
-
-
-
-}
-
+    }
 }
