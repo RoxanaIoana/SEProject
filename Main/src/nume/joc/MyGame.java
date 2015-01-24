@@ -1,20 +1,23 @@
 package nume.joc;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
+import nume.joc.screens.GameScreen;
 
 
 /**
  * Created by roxy on 1/23/2015.
  */
-public class MyGame implements ApplicationListener {
+public class MyGame extends Game {
 
 
 
     @Override
     // prima metoda care va fi apelata
     public void create() {
-//am creat o ceva.
-        /aasfas
+
+        setScreen(new GameScreen());
+
     }
 
     @Override

@@ -1,6 +1,10 @@
 package nume.joc.screens;
 
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import nume.joc.model.World;
+import nume.joc.view.WorldRenderer;
 
 
 /**
@@ -8,14 +12,28 @@ import com.badlogic.gdx.Screen;
  */
 public class GameScreen implements Screen {
 
+    private World world;
+
+    private WorldRenderer renderer;
+
 
     @Override
+    // metoda apelata cand acest ecran este activ
     public void show() {
+
+        world = new World();
+        renderer = new WorldRenderer(world);
 
     }
 
     @Override
     public void render(float delta) {
+
+        // sterge ecranul
+        Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        renderer.render();
 
 
     }
@@ -36,6 +54,7 @@ public class GameScreen implements Screen {
     }
 
     @Override
+    // metoda apelata cand alt ecran devine activ
     public void hide() {
 
     }
