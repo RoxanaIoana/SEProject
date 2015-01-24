@@ -14,6 +14,7 @@ public class MyGame implements ApplicationListener {
     // prima metoda care va fi apelata
     public void create() {
 //am creat o ceva.
+        /aasfas
     }
 
     @Override
