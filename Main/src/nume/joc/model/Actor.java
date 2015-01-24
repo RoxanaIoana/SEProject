@@ -31,7 +31,7 @@ public class Actor {
     // constante pentru calcularea vitezei si pozitiei actorului
     static final float SPEED = 2f;  // unit per second
     static final float JUMP_VELOCITY = 1f;
-    static final float SIZE = 0.5f; // half a unit
+    static public final float SIZE = 0.5f; // half a unit
 
     // proprietati care ajuta la descrierea starii actorului
     Vector2     position = new Vector2();
