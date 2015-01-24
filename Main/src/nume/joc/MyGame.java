@@ -8,7 +8,7 @@ import nume.joc.screens.GameScreen;
 /**
  * Created by roxy on 1/23/2015.
  */
-public class MyGame extends Game {
+public class MyGame extends Game{
 
 
 
@@ -28,9 +28,9 @@ public class MyGame extends Game {
 
     @Override
     // metoda apelata pana cand jocul este terminat
-    public void render() {
+   public void render() {
 
-    }
+   }
 
     @Override
     // metoda apelata cand jocul va intra in background

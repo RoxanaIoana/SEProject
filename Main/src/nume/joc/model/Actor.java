@@ -9,13 +9,21 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Actor {
 
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
     /*
-    Starile in care se poate afla actorul:
-    IDLE - actorul nu se misca si nici nu sare dar este in viata
-    WALKING - se misca la stanga sau la dreapta cu o viteza constanta
-    JUMPING - sare in sus la dreapta sau la stanga
-    DYING - a murit, nu mai este vizibil
-     */
+        Starile in care se poate afla actorul:
+        IDLE - actorul nu se misca si nici nu sare dar este in viata
+        WALKING - se misca la stanga sau la dreapta cu o viteza constanta
+        JUMPING - sare in sus la dreapta sau la stanga
+        DYING - a murit, nu mai este vizibil
+         */
     public enum State {
         IDLE, WALKING, JUMPING, DYING
     }

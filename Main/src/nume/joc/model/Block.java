@@ -23,4 +23,11 @@ public class Block {
     }
 
 
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
 }

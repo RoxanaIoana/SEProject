@@ -36,6 +36,40 @@ public class WorldRenderer {
 
     }
     public void render() {
+// render blocks
+        debugRenderer.setProjectionMatrix(cam.combined);
+
+        debugRenderer.begin(ShapeType.Line);
+
+        for (Object blockObj : world.getBlocks()) {
+            Block block = (Block) blockObj;
+            Rectangle rect = block.getBounds();
+
+            float x1 = block.getPosition().x + rect.x;
+
+            float y1 = block.getPosition().y + rect.y;
+
+            debugRenderer.setColor(new Color(1, 0, 0, 1));
+
+            debugRenderer.rect(x1, y1, rect.width, rect.height);
+
+        }
+
+        // render Bob
+
+        Actor actor = world.getActor();
+
+        Rectangle rect = actor.getBounds();
+
+        float x1 = actor.getPosition().x + rect.x;
+
+        float y1 = actor.getPosition().y + rect.y;
+
+        debugRenderer.setColor(new Color(0, 1, 0, 1));
+
+        debugRenderer.rect(x1, y1, rect.width, rect.height);
+
+        debugRenderer.end();
 
     }
 
