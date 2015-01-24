@@ -9,6 +9,12 @@ import nume.joc.MyGame;
  */
 public class DesktopStarter {
     public static void main(String[] args) {
+        LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
+        cfg.title = "MyGame";
+        cfg.useGL30 = true;
+        cfg.width = 480;
+        cfg.height = 320;
 
+        new LwjglApplication(new MyGame(), cfg);
     }
 }
