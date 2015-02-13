@@ -23,9 +23,9 @@ public class MyActivity extends AndroidApplication {
 
             config.useCompass = false;
 
-            config.useWakelock = true;
+            //config.useWakelock = true;
 
-            //config.useGL20 = true;
+            config.useGLSurfaceView20API18 = true;
 
             initialize(new MyGame(), config);
 

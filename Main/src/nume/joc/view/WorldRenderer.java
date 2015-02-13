@@ -68,7 +68,7 @@ public class WorldRenderer {
 
 
     // constructorul  clasei
-    public WorldRenderer(World world) {
+    public WorldRenderer(World world, boolean debug) {
 
         this.world = world;
         // camera are 10 unitati in lungime si 7 in inaltime (10 blocuri, respectiv 7)

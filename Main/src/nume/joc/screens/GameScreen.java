@@ -6,6 +6,8 @@ import com.badlogic.gdx.Screen;
 import nume.joc.model.World;
 import nume.joc.view.WorldRenderer;
 
+import javax.microedition.khronos.opengles.GL10;
+
 
 /**
  * Created by roxy on 1/23/2015.
@@ -22,7 +24,7 @@ public class GameScreen implements Screen {
     public void show() {
 
         world = new World();
-        renderer = new WorldRenderer(world);
+        renderer = new WorldRenderer(world,true);
 
     }
 
@@ -31,7 +33,7 @@ public class GameScreen implements Screen {
 
         // sterge ecranul
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
 
@@ -40,6 +42,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+
+        renderer.setSize(width, height);
 
     }
 

@@ -14,7 +14,7 @@ public class DesktopStarter {
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "MyGame";
-        //cfg.useGL30 = true;
+        cfg.useGL30 = true;
         cfg.width = 480;
         cfg.height = 320;
 
