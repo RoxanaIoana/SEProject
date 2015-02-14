@@ -20,33 +20,5 @@ public class MyGame extends Game{
 
     }
 
-    @Override
-    // metoda apelata de fiecare data cand suprafata desenabila va fi redimensionata
-    public void resize(int width, int height) {
 
-    }
-
-    @Override
-    // metoda apelata pana cand jocul este terminat
-   public void render() {
-
-   }
-
-    @Override
-    // metoda apelata cand jocul va intra in background
-    public void pause() {
-
-    }
-
-    @Override
-    // metoda apelata cand aplicatia revine in foreground
-    public void resume() {
-
-    }
-
-    @Override
-    // metoda apelata la terminarea jocului si inchiderea aplicatiei
-    public void dispose() {
-
-    }
 }
