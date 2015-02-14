@@ -15,19 +15,10 @@ public class MyActivity extends AndroidApplication {
     @Override
         public void onCreate(Bundle savedInstanceState) {
 
-            super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+        AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+        initialize(new MyGame(), config);
 
-            AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-
-            config.useAccelerometer = false;
-
-            config.useCompass = false;
-
-            //config.useWakelock = true;
-
-            config.useGLSurfaceView20API18 = true;
-
-            initialize(new MyGame(), config);
 
         }
 

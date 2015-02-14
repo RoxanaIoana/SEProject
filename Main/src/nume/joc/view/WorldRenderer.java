@@ -54,17 +54,12 @@ public class WorldRenderer {
     private float ppuY; // pixels per unit on the Y axis
 
     public void setSize (int w, int h) {
-             this.width = w;
-
+        this.width = w;
         this.height = h;
-
         ppuX = (float)width / CAMERA_WIDTH;
-
         ppuY = (float)height / CAMERA_HEIGHT;
 
     }
-
-
 
 
     // constructorul  clasei
@@ -161,7 +156,7 @@ public class WorldRenderer {
         float x1 = actor.getPosition().x + rect.x;
 
         float y1 = actor.getPosition().y + rect.y;
-
+        //setam culoare verde pt chemarul actorului
         debugRenderer.setColor(new Color(0, 1, 0, 1));
 
         debugRenderer.rect(x1, y1, rect.width, rect.height);

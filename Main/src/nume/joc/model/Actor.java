@@ -9,13 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Actor {
 
-    public Vector2 getPosition() {
-        return position;
-    }
 
-    public Rectangle getBounds() {
-        return bounds;
-    }
 
     /*
         Starile in care se poate afla actorul:
@@ -29,9 +23,9 @@ public class Actor {
     }
 
     // constante pentru calcularea vitezei si pozitiei actorului
-    static final float SPEED = 2f;  // unit per second
-    static final float JUMP_VELOCITY = 1f;
-    static public final float SIZE = 0.5f; // half a unit
+    public static final float SPEED = 4f;  // unit per second
+    public static final float JUMP_VELOCITY = 4f;
+    public static final float SIZE = 0.5f; // half a unit
 
     // proprietati care ajuta la descrierea starii actorului
     Vector2     position = new Vector2();
@@ -50,5 +44,39 @@ public class Actor {
 
     }
 
+    public Vector2 getPosition() {
+        return position;
+    }
 
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
+    public Vector2 getAcceleration() {
+        return acceleration;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public Vector2 getVelocity() {
+        return velocity;
+    }
+
+    public void setFacingLeft(boolean facingLeft) {
+        this.facingLeft = facingLeft;
+    }
+
+    public boolean isFacingLeft() {
+        return facingLeft;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void update(float delta) {
+        position.add(velocity.cpy().scl(delta));
+    }
 }
