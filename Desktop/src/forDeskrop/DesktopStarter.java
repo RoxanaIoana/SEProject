@@ -3,6 +3,7 @@ package forDeskrop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import nume.joc.MyGame;
+//import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
 
 
 /**
@@ -13,6 +14,8 @@ public class DesktopStarter {
 
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
+        cfg.title = "MyGame";
+        //TexturePacker2.process("/Android/assets/images/", "/Android/assets/images/texture/", "textures.pack");
         new LwjglApplication(new MyGame(), cfg);
     }
 }

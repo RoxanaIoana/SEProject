@@ -11,14 +11,12 @@ public class World {
 
 
     // blocurile
-    Array blocks = new Array();
+    Array<Block> blocks = new Array<Block>();
 
     Actor actor;
 
-    public Array getBlocks() {
-
+    public Array<Block> getBlocks() {
         return blocks;
-
     }
 
     public Actor getActor() {
@@ -35,17 +33,19 @@ public class World {
 
     // adaugarea blocurilor
    private void createDemoWorld() {
-
+        //pozitionarea actorului
         actor = new Actor(new Vector2(7, 2));
-
+       //creaza liniile cu blocuri
        for (int i = 0; i < 10; i++) {
            blocks.add(new Block(new Vector2(i, 0)));                       blocks.add(new Block(new Vector2(i, 7)));
+           blocks.add(new Block(new Vector2(i, 6)));
+           //a doua linie de blocuri
            if (i > 2)
              blocks.add(new Block(new Vector2(i, 1)));
 
        }
 
-
+        //restul liniilor
        blocks.add(new Block(new Vector2(9, 2)));
         blocks.add(new Block(new Vector2(9, 3)));
         blocks.add(new Block(new Vector2(9, 4)));

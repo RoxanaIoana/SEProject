@@ -24,6 +24,7 @@ public class WorldRenderer {
 
     private static final float CAMERA_HEIGHT = 7f;
 
+    private static final float RUNNING_FRAME_DURATION = 0.06f;
 
     private World world;
 
@@ -35,8 +36,7 @@ public class WorldRenderer {
 
     /** Textures **/
 
-    private Texture bobTexture;
-
+    private Texture ActorTexture;
     private Texture blockTexture;
 
 
@@ -57,6 +57,7 @@ public class WorldRenderer {
         this.width = w;
         this.height = h;
         ppuX = (float)width / CAMERA_WIDTH;
+        spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, this.width, this.height);
         ppuY = (float)height / CAMERA_HEIGHT;
 
     }
@@ -81,7 +82,7 @@ public class WorldRenderer {
 
     private void loadTextures() {
 
-        bobTexture = new  Texture(Gdx.files.internal("images/bob_01.png"));
+        ActorTexture = new  Texture(Gdx.files.internal("images/bob_01.png"));
 
         blockTexture = new Texture(Gdx.files.internal("images/block.png"));
 
@@ -120,7 +121,7 @@ public class WorldRenderer {
 
         Actor actor = world.getActor();
 
-        spriteBatch.draw(bobTexture, actor.getPosition().x * ppuX, actor.getPosition().y * ppuY, Actor.SIZE * ppuX, Actor.SIZE * ppuY);
+        spriteBatch.draw(ActorTexture, actor.getPosition().x * ppuX, actor.getPosition().y * ppuY, Actor.SIZE * ppuX, Actor.SIZE * ppuY);
 
     }
 
@@ -147,7 +148,7 @@ public class WorldRenderer {
 
         }
 
-        // render Bob
+        // render Actor
 
         Actor actor = world.getActor();
 
