@@ -38,7 +38,8 @@ public class World {
         actor = new Actor(new Vector2(7, 2));
        //creaza liniile cu blocuri
        for (int i = 0; i < 10; i++) {
-           blocks.add(new Block(new Vector2(i, 0)));                       blocks.add(new Block(new Vector2(i, 7)));
+           blocks.add(new Block(new Vector2(i, 0)));
+           blocks.add(new Block(new Vector2(i, 7)));
            blocks.add(new Block(new Vector2(i, 6)));
            //a doua linie de blocuri
            if (i > 2)

@@ -1,5 +1,6 @@
 package nume.joc.screens;
 
+import nume.joc.MyGame;
 import nume.joc.model.World;
 import nume.joc.controller.WorldController;
 import nume.joc.view.WorldRenderer;
@@ -23,6 +24,17 @@ public class GameScreen implements Screen, InputProcessor {
     private WorldController	controller;
 
     private int width, height;
+
+    MyGame game;
+
+
+    public GameScreen(MyGame game) {
+        this.game=game;
+    }
+
+  public GameScreen() {
+
+  }
 
     @Override
     public void show() {
