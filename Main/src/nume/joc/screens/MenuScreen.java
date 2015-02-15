@@ -3,6 +3,7 @@ package nume.joc.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -12,10 +13,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import nume.joc.MyGame;
@@ -33,10 +31,17 @@ public class MenuScreen implements Screen {
     Stage stage;
     Table table;
     SpriteBatch batch;
+    Music mp3Sound;
 
     public MenuScreen(MyGame g){
         create();
         this.game=g;
+
+        mp3Sound = Gdx.audio.newMusic(Gdx.files.internal("sleepy.mp3"));
+        mp3Sound.setLooping(true);
+        mp3Sound.play();
+
+
     }
 
     public MenuScreen(){
@@ -47,6 +52,7 @@ public class MenuScreen implements Screen {
         stage = new Stage();
         table= new Table();
         table.debug();
+
         Gdx.input.setInputProcessor(stage);
 
         // declar un skin pentru a alege cum sa arate butonul
@@ -74,13 +80,22 @@ public class MenuScreen implements Screen {
 
         skin.add("default", textButtonStyle);
 
+
+        Label.LabelStyle labelStyle=new Label.LabelStyle();
+        labelStyle.font=skin.getFont("default");
+
+
+        Label welcomeLabel = new Label( "Welcome !", labelStyle );
+        welcomeLabel.setPosition(260,400);
+
+        stage.addActor( welcomeLabel );
+
+
         // Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
         final TextButton textButton=new TextButton("Start Game",textButtonStyle);
-        textButton.setPosition(250, 300);
+        textButton.setPosition(250, 250);
         stage.addActor(textButton);
-       // stage.addActor(textButton);
-       // stage.addActor(textButton);
-        //stage.addActor(table);
+
 
        final TextButton textButton2=new TextButton("Exit Game",textButtonStyle);
         textButton2.setPosition(260, 100);
@@ -91,6 +106,7 @@ public class MenuScreen implements Screen {
         // adaug un eveniment la schimbarea starii butonului
         textButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
+                mp3Sound.stop();
                  game.setScreen( new GameScreen());
 
             }
