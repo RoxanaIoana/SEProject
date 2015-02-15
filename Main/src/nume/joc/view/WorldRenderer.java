@@ -12,8 +12,12 @@ import com.badlogic.gdx.math.Rectangle;
 import nume.joc.model.Actor;
 import nume.joc.model.Block;
 import nume.joc.model.World;
+import nume.joc.model.Actor.State;
 
-
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Created by roxy on 1/24/2015.
  */
@@ -34,10 +38,19 @@ public class WorldRenderer {
     // folosit pentru a declara primitive (de exemplu: dreptunghi )
     ShapeRenderer debugRenderer = new ShapeRenderer();
 
-    /** Textures **/
+    /* Texturi si regiuni*/
+    private TextureRegion actorIdleLeft;
+    private TextureRegion actorIdleRight;
+    private TextureRegion blockTexture;
+    private TextureRegion actorFrame;
+    private TextureRegion actorJumpLeft;
+    private TextureRegion actorFallLeft;
+    private TextureRegion actorJumpRight;
+    private TextureRegion actorFallRight;
 
-    private Texture ActorTexture;
-    private Texture blockTexture;
+    /* Animations */
+    private Animation walkLeftAnimation;
+    private Animation walkRightAnimation;
 
 
 
@@ -61,8 +74,12 @@ public class WorldRenderer {
         ppuY = (float)height / CAMERA_HEIGHT;
 
     }
-
-
+    public boolean isDebug() {
+        return debug;
+    }
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
     // constructorul  clasei
     public WorldRenderer(World world, boolean debug) {
 
@@ -81,11 +98,38 @@ public class WorldRenderer {
     }
 
     private void loadTextures() {
+        //atlasul creat in textures
+        //exista niste regiuni fiecare regiune reprezinta o imagine bob-0X
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("images/textures/textures.pack"));
+        //img cu actor in poz stanga
+        actorIdleLeft = atlas.findRegion("bob-01");
+        actorIdleRight = new TextureRegion(actorIdleLeft);
+        actorIdleRight.flip(true, false);
+        //regiunea pt bloc
+        blockTexture = atlas.findRegion("block");
+        //atunci cand actorul merge spre stanga se vor rula imag si se va forma o aminatie
+        TextureRegion[] walkLeftFrames = new TextureRegion[5];
+        for (int i = 0; i < 5; i++) {
+            walkLeftFrames[i] = atlas.findRegion("bob-0" + (i + 2));
+        }
 
-        ActorTexture = new  Texture(Gdx.files.internal("images/bob_01.png"));
+        walkLeftAnimation = new Animation(RUNNING_FRAME_DURATION, walkLeftFrames);
 
-        blockTexture = new Texture(Gdx.files.internal("images/block.png"));
+        TextureRegion[] walkRightFrames = new TextureRegion[5];
 
+        for (int i = 0; i < 5; i++) {
+            walkRightFrames[i] = new TextureRegion(walkLeftFrames[i]);
+            walkRightFrames[i].flip(true, false);
+        }
+        //pt jump se va pune regiunea cu imaginea bob-up
+        walkRightAnimation = new Animation(RUNNING_FRAME_DURATION, walkRightFrames);
+        actorJumpLeft = atlas.findRegion("bob-up");
+        //la dreapta sa genereaza o noua regiune folosindune de regiunea formata pe stanga
+        actorJumpRight = new TextureRegion(actorJumpLeft);
+        actorJumpRight.flip(true, false);
+        actorFallLeft = atlas.findRegion("bob-down");
+        actorFallRight = new TextureRegion(actorFallLeft);
+        actorFallRight.flip(true, false);
     }
 
     public void render() {
@@ -120,11 +164,23 @@ public class WorldRenderer {
     private void drawActor() {
 
         Actor actor = world.getActor();
-
-        spriteBatch.draw(ActorTexture, actor.getPosition().x * ppuX, actor.getPosition().y * ppuY, Actor.SIZE * ppuX, Actor.SIZE * ppuY);
-
+        //gasirea frameului actorului daca este IDLELeft sau IdleRight
+        actorFrame = actor.isFacingLeft() ? actorIdleLeft : actorIdleRight;
+        //se cauata pozitia actorului in fucntie de KeyFrame (left sau right walking)
+        if(actor.getState().equals(State.WALKING)) {
+            actorFrame = actor.isFacingLeft() ? walkLeftAnimation.getKeyFrame(actor.getStateTime(), true) : walkRightAnimation.getKeyFrame(actor.getStateTime(), true);
+            //SAU jumping left sau right
+        } else if (actor.getState().equals(State.JUMPING)) {
+            if (actor.getVelocity().y > 0) {
+                actorFrame = actor.isFacingLeft() ? actorJumpLeft : actorJumpRight;
+            } else {
+                actorFrame = actor.isFacingLeft() ? actorFallLeft : actorFallRight;
+            }
+        }
+        //se genereaza textura -imag dupa ce am gasit pozitia(actorFrame)
+        spriteBatch.draw(actorFrame, actor.getPosition().x * ppuX, actor.getPosition().y * ppuY, Actor.SIZE * ppuX, Actor.SIZE * ppuY);
     }
-
+//este activ doar la tasta D(debug)
     private void drawDebug() {
 
         // render blocks

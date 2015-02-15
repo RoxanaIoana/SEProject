@@ -19,6 +19,8 @@ public class Block {
         this.position = pos;
         this.bounds.width = SIZE;
         this.bounds.height = SIZE;
+        this.bounds.setX(pos.x);
+        this.bounds.setY(pos.y);
 
     }
 

@@ -10,14 +10,17 @@ import com.badlogic.gdx.math.Rectangle;
 public class Actor {
 
 
+    public float getStateTime() {
+        return stateTime;
+    }
 
     /*
-        Starile in care se poate afla actorul:
-        IDLE - actorul nu se misca si nici nu sare dar este in viata
-        WALKING - se misca la stanga sau la dreapta cu o viteza constanta
-        JUMPING - sare in sus la dreapta sau la stanga
-        DYING - a murit, nu mai este vizibil
-         */
+                Starile in care se poate afla actorul:
+                IDLE - actorul nu se misca si nici nu sare dar este in viata
+                WALKING - se misca la stanga sau la dreapta cu o viteza constanta
+                JUMPING - sare in sus la dreapta sau la stanga
+                DYING - a murit, nu mai este vizibil
+                 */
     public enum State {
         IDLE, WALKING, JUMPING, DYING
     }
@@ -34,7 +37,8 @@ public class Actor {
     Rectangle   bounds = new Rectangle();
     State       state = State.IDLE;
     boolean     facingLeft = true;
-
+    float		stateTime = 0;
+    boolean		longJump = false;
 
     public Actor(Vector2 position) {
 
@@ -76,7 +80,41 @@ public class Actor {
         return state;
     }
 
+    public boolean isLongJump() {
+        return longJump;
+    }
+
+    public void setLongJump(boolean longJump) {
+        this.longJump = longJump;
+    }
+
+   public void setPosition(Vector2 position) {
+        this.position = position;
+        this.bounds.setX(position.x);
+        this.bounds.setY(position.y);
+    }
+
+    public void setAcceleration(Vector2 acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setVelocity(Vector2 velocity) {
+        this.velocity = velocity;
+    }
+
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+    }
+
+    public void setStateTime(float stateTime) {
+        this.stateTime = stateTime;
+    }
+
     public void update(float delta) {
         position.add(velocity.cpy().scl(delta));
+        bounds.x = position.x;
+        bounds.y = position.y;
+        stateTime += delta;
     }
+
 }

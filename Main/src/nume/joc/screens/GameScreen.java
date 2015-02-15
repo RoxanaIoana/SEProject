@@ -11,7 +11,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-//import javax.microedition.khronos.opengles.GL10;
 
 
 /**
@@ -28,12 +27,13 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public void show() {
         world = new World();
-        renderer = new WorldRenderer(world, true);
+        renderer = new WorldRenderer(world, false);
         controller = new WorldController(world);
         Gdx.input.setInputProcessor(this);
     }
 
     @Override
+    //background
     public void render(float delta) {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -72,12 +72,14 @@ public class GameScreen implements Screen, InputProcessor {
     // * InputProcessor methods ***************************//
 
     @Override
+    //metoda cand tasta este apasata
+    //se apeleaza una din functiile ...Presses
     public boolean keyDown(int keycode) {
         if (keycode == Keys.LEFT)
             controller.leftPressed();
         if (keycode == Keys.RIGHT)
             controller.rightPressed();
-        if (keycode == Keys.Z)
+        if (keycode == Keys.UP)
             controller.jumpPressed();
         if (keycode == Keys.X)
             controller.firePressed();
@@ -85,15 +87,18 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     @Override
+    //metoda cand tasta nu e apasata
     public boolean keyUp(int keycode) {
         if (keycode == Keys.LEFT)
             controller.leftReleased();
         if (keycode == Keys.RIGHT)
             controller.rightReleased();
-        if (keycode == Keys.Z)
+        if (keycode == Keys.UP)
             controller.jumpReleased();
         if (keycode == Keys.X)
             controller.fireReleased();
+        if (keycode == Keys.D)
+            renderer.setDebug(!renderer.isDebug());
         return true;
     }
 
@@ -102,7 +107,7 @@ public class GameScreen implements Screen, InputProcessor {
         // TODO Auto-generated method stub
         return false;
     }
-
+//PENTRU ANDROID
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
         if (!Gdx.app.getType().equals(ApplicationType.Android))

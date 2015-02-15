@@ -16,6 +16,7 @@ public class World {
     Actor actor;
 
     public Array<Block> getBlocks() {
+
         return blocks;
     }
 
