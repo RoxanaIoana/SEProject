@@ -43,6 +43,9 @@ public class WorldController {
     public WorldController(World world) {
         this.world = world;
         this.actor = world.getActor();
+
+
+
     }
 
     // ** Key presses and touches **************** //
@@ -87,6 +90,9 @@ public class WorldController {
         actor.getAcceleration().y = GRAVITY;
         actor.getAcceleration().scl(delta);
         actor.getVelocity().add(actor.getAcceleration().x, actor.getAcceleration().y);
+
+
+
         if (actor.getAcceleration().x == 0) actor.getVelocity().x *= DAMP;
         if (actor.getVelocity().x > MAX_VEL) {
             actor.getVelocity().x = MAX_VEL;
@@ -110,6 +116,8 @@ public class WorldController {
                 actor.setState(State.IDLE);
             }
         }
+
+
         if (actor.getPosition().x > WIDTH - actor.getBounds().width ) {
             actor.getPosition().x = WIDTH - actor.getBounds().width;
             actor.setPosition(actor.getPosition());
@@ -117,6 +125,11 @@ public class WorldController {
                 actor.setState(State.IDLE);
             }
         }
+
+
+
+
+
     }
 
     /** Change Bob's state and parameters based on input controls **/
@@ -160,5 +173,7 @@ public class WorldController {
         }
         return false;
     }
+
+
 
 }

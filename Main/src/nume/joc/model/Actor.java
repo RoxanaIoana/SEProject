@@ -35,16 +35,22 @@ public class Actor {
     Vector2     acceleration = new Vector2();
     Vector2     velocity = new Vector2();
     Rectangle   bounds = new Rectangle();
-    State       state = State.IDLE;
-    boolean     facingLeft = true;
-    float		stateTime = 0;
-    boolean		longJump = false;
+    State       state;
+    boolean     facingLeft;
+    float		stateTime;
+    boolean		longJump;
 
     public Actor(Vector2 position) {
 
         this.position = position;
         this.bounds.height = SIZE;
         this.bounds.width = SIZE;
+
+        state = State.IDLE;
+
+        facingLeft = true;
+        stateTime = 0;
+        longJump = false;
 
     }
 
