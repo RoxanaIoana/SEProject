@@ -125,6 +125,27 @@ public class WorldController {
         }
 
         actor.update(delta);
+        if (actor.getPosition().y < 0) {
+            actor.getPosition().y = 0f;
+            actor.setPosition(actor.getPosition());
+            if (actor.getState().equals(State.JUMPING)) {
+                actor.setState(State.IDLE);
+            }
+        }
+        if (actor.getPosition().x < 0) {
+            actor.getPosition().x = 0;
+            actor.setPosition(actor.getPosition());
+            if (!actor.getState().equals(State.JUMPING)) {
+                actor.setState(State.IDLE);
+            }
+        }
+        if (actor.getPosition().x > WIDTH - actor.getBounds().width ) {
+            actor.getPosition().x = WIDTH - actor.getBounds().width;
+            actor.setPosition(actor.getPosition());
+            if (!actor.getState().equals(State.JUMPING)) {
+                actor.setState(State.IDLE);
+            }
+        }
 
     }
 
@@ -144,10 +165,10 @@ public class WorldController {
         int endY = (int) (actor.getBounds().y + actor.getBounds().height);
         // if Bob is heading left then we check if he collides with the block on his left
         // we check the block on his right otherwise
-        if (actor.getVelocity().x < 0) {
-            startX = endX = (int) Math.floor(actor.getBounds().x + actor.getVelocity().x);
+        if (actor.getVelocity().x > 0) {
+            startX = endX = (int)(actor.getPosition().x + actor.getBounds().width + actor.getVelocity().x);
         } else {
-            startX = endX = (int) Math.floor(actor.getBounds().x + actor.getBounds().width + actor.getVelocity().x);
+            startX = endX = (int)(actor.getPosition().x + actor.getVelocity().x);
         }
 
         // get the block(s) bob can collide with
@@ -230,6 +251,7 @@ public class WorldController {
                 jumpPressedTime = System.currentTimeMillis();
                 actor.setState(State.JUMPING);
                 actor.getVelocity().y = MAX_JUMP_SPEED;
+                grounded = false;
             } else {
                 if (jumpingPressed && ((System.currentTimeMillis() - jumpPressedTime) >= LONG_JUMP_PRESS)) {
                     jumpingPressed = false;
@@ -246,7 +268,11 @@ public class WorldController {
             if (!actor.getState().equals(State.JUMPING)) {
                 actor.setState(State.WALKING);
             }
+            if (grounded ==true) {
+                actor.setState(State.WALKING);
+            }
             actor.getAcceleration().x = -ACCELERATION;
+
         } else if (keys.get(Keys.RIGHT)) {
             // left is pressed
             actor.setFacingLeft(false);

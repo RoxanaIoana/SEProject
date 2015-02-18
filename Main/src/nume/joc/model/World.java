@@ -117,14 +117,14 @@ public class World {
 
        Enemy en1 = new Enemy(new Vector2(16, 2));
        Enemy en2 = new Enemy(new Vector2(6, 2));
-       Enemy en3 = new Enemy(new Vector2(5, 1));
-       Enemy en4 = new Enemy(new Vector2(3, 1));
+     //  Enemy en3 = new Enemy(new Vector2(5, 1));
+       Enemy en4 = new Enemy(new Vector2(2, 1));
        Enemy en5 = new Enemy(new Vector2(19, 4));
 
 
     enemy.add(en1);
     enemy.add(en2);
-    enemy.add(en3);
+ //   enemy.add(en3);
     enemy.add(en4);
     enemy.add(en5);
 

@@ -10,8 +10,14 @@ import com.badlogic.gdx.math.Rectangle;
 public class Actor {
 
 
+    private float width;
+
     public float getStateTime() {
         return stateTime;
+    }
+
+    public float getWidth() {
+        return width;
     }
 
     /*
