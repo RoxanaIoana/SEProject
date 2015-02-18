@@ -86,19 +86,19 @@ public class MenuScreen implements Screen {
 
 
         Label welcomeLabel = new Label( "Welcome !", labelStyle );
-        welcomeLabel.setPosition(260,400);
+        welcomeLabel.setPosition(350,400);
 
         stage.addActor( welcomeLabel );
 
 
         // Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
         final TextButton textButton=new TextButton("Start Game",textButtonStyle);
-        textButton.setPosition(250, 250);
+        textButton.setPosition(350, 250);
         stage.addActor(textButton);
 
 
-       final TextButton textButton2=new TextButton("Exit Game",textButtonStyle);
-        textButton2.setPosition(260, 100);
+       final TextButton textButton2=new TextButton(" Exit Game ",textButtonStyle);
+        textButton2.setPosition(350, 100);
         stage.addActor(textButton2);
 
 

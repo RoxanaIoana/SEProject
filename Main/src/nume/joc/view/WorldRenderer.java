@@ -29,7 +29,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class WorldRenderer {
 
 
-    private static final float CAMERA_WIDTH = 10f;
+    private static final float CAMERA_WIDTH = 20f;
 
     private static final float CAMERA_HEIGHT = 7f;
 
@@ -177,12 +177,12 @@ public class WorldRenderer {
 
     public void render(float delta) {
 
-        Actor actor = world.getActor();
-        debugRenderer.setProjectionMatrix(cam.combined);
+        //Actor actor = world.getActor();
+        //debugRenderer.setProjectionMatrix(cam.combined);
 
 
-        cam.position.x = actor.getPosition().x;
-        cam.update();
+     // cam.position.x = actor.getPosition().x;
+      //  cam.update();
         spriteBatch.begin();
 
         drawBlocks();
@@ -191,9 +191,9 @@ public class WorldRenderer {
         drawEnemies();
         drawBullets();
 
-        actor.update(delta);
+        //actor.update(delta);
         spriteBatch.end();
-
+        drawCollisionBlocks();
         if (debug)
 
             drawDebug();
@@ -216,11 +216,8 @@ public class WorldRenderer {
 
     private void drawBlocks() {
 
-        for (Object blockObj : world.getBlocks()) {
-
-            Block block = (Block) blockObj;
+        for (Block block : world.getDrawableBlocks((int)CAMERA_WIDTH, (int)CAMERA_HEIGHT)) {
             spriteBatch.draw(blockTexture, block.getPosition().x * ppuX, block.getPosition().y * ppuY, Block.SIZE * ppuX, Block.SIZE * ppuY);
-
         }
 
     }
@@ -243,6 +240,8 @@ public class WorldRenderer {
         }
         //se genereaza textura -imag dupa ce am gasit pozitia(actorFrame)
         spriteBatch.draw(actorFrame, actor.getPosition().x * ppuX, actor.getPosition().y * ppuY, Actor.SIZE * ppuX, Actor.SIZE * ppuY);
+
+
     }
 
     //este activ doar la tasta D(debug)
@@ -254,9 +253,7 @@ public class WorldRenderer {
 
         debugRenderer.begin(ShapeType.Line);
 
-        for (Object blockObj : world.getBlocks()) {
-
-            Block block = (Block) blockObj;
+        for (Block block : world.getDrawableBlocks((int)CAMERA_WIDTH, (int)CAMERA_HEIGHT)) {
             Rectangle rect = block.getBounds();
 
             float x1 = block.getPosition().x + rect.x;
@@ -287,7 +284,16 @@ public class WorldRenderer {
 
     }
 
+    private void drawCollisionBlocks() {
+        debugRenderer.setProjectionMatrix(cam.combined);
+        debugRenderer.begin(ShapeType.Filled);
+        debugRenderer.setColor(new Color(1, 1, 1, 1));
+        for (Rectangle rect : world.getCollisionRects()) {
+            debugRenderer.line(rect.x, rect.y, rect.width, rect.height);
+        }
+        debugRenderer.end();
 
+    }
     private void getEnemyTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
        /* rectPool.freeAll(tiles);
         tiles.clear();

@@ -15,6 +15,7 @@ public class DesktopStarter {
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "MyGame";
+        cfg.width=800;
         //TexturePacker2.process("/Android/assets/images/", "/Android/assets/images/texture/", "textures.pack");
         new LwjglApplication(new MyGame(), cfg);
     }
