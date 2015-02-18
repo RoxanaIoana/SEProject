@@ -85,9 +85,13 @@ public class WorldRenderer {
 
         this.world = world;
         // camera are 10 unitati in lungime si 7 in inaltime (10 blocuri, respectiv 7)
-        this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
-        this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
-        this.cam.update();
+      //  this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
+       // this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
+       // cam.setToOrtho(false);
+        //this.cam.update();
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false);
+        cam.update();
 
         this.debug = debug;
 
@@ -134,6 +138,10 @@ public class WorldRenderer {
 
     public void render() {
 
+        Actor actor = world.getActor();
+        spriteBatch.setProjectionMatrix(cam.combined);
+        cam.position.x = actor.getPosition().x+300;
+        cam.update();
         spriteBatch.begin();
 
         drawBlocks();
